@@ -1,0 +1,83 @@
+<mxfile host="app.diagrams.net" modified="2024-07-19T02:39:46.627Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0" etag="3VBG1sgAyoEHCcZd5xKC" version="24.7.1" type="device">
+  <diagram name="第 1 页" id="Ve0foTADD3AeuEGKaNCC">
+    <mxGraphModel dx="1221" dy="822" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PS8isPawKSenbVNcxJOC-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.435;entryY=0.026;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="PS8isPawKSenbVNcxJOC-1" edge="1" target="PS8isPawKSenbVNcxJOC-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="527" y="308" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="106" y="279" />
+              <mxPoint x="494" y="279" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="PS8isPawKSenbVNcxJOC-1" target="PS8isPawKSenbVNcxJOC-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-1" value="" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="91" y="352" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="PS8isPawKSenbVNcxJOC-6" target="PS8isPawKSenbVNcxJOC-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-6" value="本地 txt or md 存储" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="565" y="352" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PS8isPawKSenbVNcxJOC-7" target="PS8isPawKSenbVNcxJOC-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="549" y="367" />
+              <mxPoint x="549" y="367" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="PS8isPawKSenbVNcxJOC-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="109" y="437" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="387" y="412" />
+              <mxPoint x="387" y="407" />
+              <mxPoint x="368" y="407" />
+              <mxPoint x="368" y="437" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-7" value="数据和密码" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="308" y="352" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-9" value="对称加密(仅密码部分)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="436" y="326" width="134" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-12" value="主密钥" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="137" y="250" width="54" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-13" value="存储区{必填：网站，密码 可填：用户名等}" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="127" y="309" width="245" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-14" value="生成区{选择生成的密码种类和长度}" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="140" y="290" width="206" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PS8isPawKSenbVNcxJOC-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="108" y="420" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="501" y="485" />
+              <mxPoint x="108" y="485" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-16" value="对称解密" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="468" y="412" width="66" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-18" value="主密钥" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="141" y="494" width="54" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="PS8isPawKSenbVNcxJOC-21" value="查询区{网站，密码}" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="163" y="402" width="122" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -31,11 +31,11 @@ C:\Users\Username\password_person。其中Username为你的用户名。生成两
 
 ##### 功能一：随机产生密码，产生好密码后自动填写到保存密码的框中。
 
-##### 功能二：保存密码，产生好密码后加密保存到本地文件中，其中网址必填，用户名可填，密码帮你填好了不可修改。
+##### 功能二：保存密码，产生好密码后加密保存到本地文件中，其中网址必填，用户名可填。
 
-##### 功能三：查询密码，输入网址进行查询，网址相当于主键。记得注意的是，如果你网址输入1，但是当初你存储1这个网址的密钥不是123，你就无法查询到这个网址的密码，会显示无效的密钥。当然也是支持一次查询这个网址的多个账号的。
+##### 功能三：查询密码，输入网址进行查询，网址相当于主键。记得注意的是，如果你网址输入1，但是当初你存储1这个网址的密钥不是123，你就无法查询到这个网址的密码，会显示无效的密钥。当然也是支持一次查询这个网址的多个账号的。Open按键会在旁边新生成一个比较大的框显示密码。
 
-##### 功能四：删除密码，根据输入的网址进行删除。
+##### 功能四：删除密码，根据输入的网址进行删除，需要密钥相同才能删除。
 
 ![](src/img_5.png)
 
@@ -43,11 +43,10 @@ C:\Users\Username\password_person。其中Username为你的用户名。生成两
 
 #### To do list：
 
-- [ ] 查询搜索算法优化：支持输入网址中的一部分搜索
-- [ ] 删除网址需要密钥正确
-- [ ] 界面美化
-- [ ] 快捷打开本地文件
+- [x] 查询搜索算法优化：支持输入网址中的一部分搜索。（以符号为间隔，如https://github.com/muzi-xiaoren关键词为{https,github,com,muzi-xiaoren}）
+- [x] 删除网址需要密钥正确。
+- [x] 界面美化。
 
 
 
-构建exe的命令：pyinstaller --onefile -i tb.ico --windowed main.py -p crypto_utils.py -p file_utils.py -p gui.py -p password_utils.py
+构建exe的命令：pyinstaller --onefile -i tb.ico --windowed main.py -p data_crypto.py -p file_stream.py -p gui.py -p password_generate.py

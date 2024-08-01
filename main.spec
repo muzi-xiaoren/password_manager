@@ -3,7 +3,7 @@
 
 a = Analysis(
     ['main.py'],
-    pathex=['crypto_utils.py', 'file_utils.py', 'gui.py', 'password_utils.py'],
+    pathex=['data_crypto.py', 'file_stream.py', 'gui.py', 'password_generate.py'],
     binaries=[],
     datas=[],
     hiddenimports=[],
