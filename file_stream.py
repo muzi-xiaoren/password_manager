@@ -2,11 +2,24 @@ import os
 from data_crypto import generate_key, encrypt_data, decrypt_data
 from cryptography.fernet import InvalidToken
 
+
 # 创建保存文件夹
 home_dir = os.path.expanduser('~')
 SAVE_DIR = os.path.join(home_dir, 'password_person')
 if not os.path.exists(SAVE_DIR):
     os.makedirs(SAVE_DIR)
+
+# 检查并创建passwords.md和passwords.txt文件
+md_file_path = os.path.join(SAVE_DIR, 'passwords.md')
+txt_file_path = os.path.join(SAVE_DIR, 'passwords.txt')
+
+# 如果文件不存在，则创建它们
+if not os.path.exists(md_file_path):
+    open(md_file_path, 'w').close()
+
+if not os.path.exists(txt_file_path):
+    open(txt_file_path, 'w').close()
+
 
 def save_data(master_password, website, username, password):
     key = generate_key(master_password)
@@ -27,9 +40,15 @@ def save_data(master_password, website, username, password):
 
     return True
 
+
 # 检查是否存在相同的条目
 def check_existing_entry(key, website, username, password):
     txt_file_path = os.path.join(SAVE_DIR, 'passwords.txt')
+
+        # 检查文件是否为空
+    if os.path.getsize(txt_file_path) == 0:
+        return False
+    
     with open(txt_file_path, 'r') as file:
         for line in file:
             stored_website, stored_username, stored_encrypted_password = line.strip().split(',')
@@ -43,6 +62,7 @@ def check_existing_entry(key, website, username, password):
                     continue
     return False
         
+
 def query_data(master_password, website):
     key = generate_key(master_password)
     results = []
@@ -74,6 +94,7 @@ def query_data(master_password, website):
         return "Invalid master key"
     else:
         return None
+
 
 def delete_data(master_password, website):
     key = generate_key(master_password)

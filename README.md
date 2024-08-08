@@ -49,4 +49,6 @@
 #### To do list
 - [ ] 打包备份，迁移到其他电脑读取备份。（因为可以手动迁移，可能会鸽掉。）
 
+环境命令：`pip install -r requirements.txt`
+
 构建exe的命令：`pyinstaller --onefile -i tb.ico --windowed main.py -p data_crypto.py -p file_stream.py -p gui.py -p password_generate.py`
