@@ -1,47 +1,10 @@
 import os
 import subprocess
 import tkinter as tk
-from tkinter import simpledialog
 from tkinter import font as tkfont
 from password_generate import generate_data
 from file_stream import save_data, query_data, delete_data
-
-
-class CustomMessageBox(tk.Toplevel):
-    def __init__(self, parent, title, message, font):
-        super().__init__(parent)
-        self.title(title)
-        self.geometry("400x200")
-        self.resizable(False, False)
-
-        self.label = tk.Label(self, text=message, font=font, wraplength=350)
-        self.label.pack(pady=20)
-
-        self.ok_button = tk.Button(self, text="OK", command=self.destroy, font=font)
-        self.ok_button.pack(pady=20)
-
-        # 将消息框放置在主界面的正中央
-        self.center_window(parent)
-
-    def center_window(self, parent):
-        # 获取主窗口的位置和尺寸
-        parent_x = parent.winfo_rootx()
-        parent_y = parent.winfo_rooty()
-        parent_width = parent.winfo_width()
-        parent_height = parent.winfo_height()
-
-        # 获取消息框的宽度和高度
-        self.update_idletasks()  # 更新消息框的尺寸信息
-        window_width = self.winfo_width()
-        window_height = self.winfo_height()
-
-        # 计算消息框的位置
-        x = parent_x + (parent_width - window_width) // 2
-        y = parent_y + (parent_height - window_height) // 2
-
-        # 设置消息框的位置
-        self.geometry(f'{window_width}x{window_height}+{x}+{y}')
-
+from messagebox_gui import CustomMessageBox
 
 class PasswordManager:
     def __init__(self, root):
@@ -51,7 +14,11 @@ class PasswordManager:
         # 计算屏幕中心位置
         self.center_window(820, 530)
         self.root.withdraw()  # 先隐藏主窗口
-        self.master_password = simpledialog.askstring("Master Key", "Enter your master Key:")
+
+        font = tkfont.Font(family="Comic Sans MS", size=13)
+        custom_message_box = CustomMessageBox(self.root, "Master Key", "Enter your master Key:", font, show_entry=True)
+        self.master_password = custom_message_box.show()
+        # self.master_password = simpledialog.askstring("Master Key", "Enter your master Key:")
 
         if self.master_password is None:
             self.root.destroy()
@@ -76,6 +43,9 @@ class PasswordManager:
 
         # 设置窗口的位置
         self.root.geometry(f'{width}x{height}+{x}+{y}')
+
+    def show_message(self, title, message, font):
+        CustomMessageBox(self.root, title, message, font).show()
 
     def create_widgets(self):
         # 设置主窗口的字体
@@ -304,14 +274,12 @@ class PasswordManager:
         if os.path.exists(md_path):
             subprocess.Popen(['start', md_path], shell=True)
         else:
-            self.show_message("Error", "MD file not found.", self.bold_font)
+            self.show_message("Error", "MD file not found. Please store your password first", self.bold_font)
 
     def open_txt_file(self):
         txt_path = os.path.join(os.path.expanduser('~'), 'password_person', 'passwords.txt')
         if os.path.exists(txt_path):
             subprocess.Popen(['start', txt_path], shell=True)
         else:
-            self.show_message("Error", "TXT file not found.", self.bold_font)
+            self.show_message("Error", "TXT file not found. Please store your password first", self.bold_font)
 
-    def show_message(self, title, message, font):
-        CustomMessageBox(self.root, title, message, font)
