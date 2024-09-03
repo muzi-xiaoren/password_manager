@@ -18,11 +18,12 @@ class CustomMessageBox(tk.Toplevel):
         if show_entry:
             self.entry = tk.Entry(self, font=font, justify="center")
             self.entry.pack(pady=10)
-            self.entry.bind("<Return>", self.on_ok)  # 绑定回车键
+            # self.entry.bind("<Return>", self.on_ok)
 
         self.ok_button = tk.Button(self, text="OK", command=self.on_ok, font=font)
+        
         self.ok_button.pack(pady=10)
-
+        self.bind("<Return>", self.on_ok)  # 绑定回车键
         # 将消息框放置在主界面的正中央
         self.center_window(parent)
 
@@ -60,6 +61,8 @@ class CustomMessageBox(tk.Toplevel):
         self.destroy()
 
     def show(self):
-        self.grab_set()
-        self.wait_window()
+        self.update_idletasks()  # 确保窗口已经准备好
+        self.grab_set()  # 设置模态窗口
+        self.focus_set()  # 设置焦点
+        self.wait_window()  # 等待窗口关闭
         return self.result

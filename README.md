@@ -40,17 +40,22 @@
 ![](img_src/img_5.png)
 
 
-#### Doned list：
+#### Doned list:
 
 - [x] 查询搜索算法优化：支持输入网址中的一部分搜索。（以符号为间隔，如 https://github.com/muzi-xiaoren 的关键词为{https,github,com,muzi-xiaoren}）
 - [x] 删除网址需要密钥正确。
 - [x] 界面美化。
+- [x] Generate旁边增加Default选择所有选项的按钮，并默认生成长度为20的密码。
+- [x] 按钮绑定回车键，便于操作。
 
-#### To do list
+#### To do list:
+
 - [ ] 输入主密钥，一键导出所有主密钥能解密的网站和密码。
 - [ ] 打包备份，迁移到其他电脑读取备份。（因为可以手动迁移，可能会鸽掉。）
 - [ ] 优化算法，减少加解密次数。
 - [ ] 窗口内快捷更换主密钥。
+
+
 
 环境命令：`pip install -r requirements.txt`
 

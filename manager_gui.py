@@ -20,12 +20,12 @@ class PasswordManager:
         self.master_password = custom_message_box.show()
         # self.master_password = simpledialog.askstring("Master Key", "Enter your master Key:")
 
+        if not self.master_password:
+            self.master_password = ' '  # 默认使用空格作为 Master Key
+
         if self.master_password is None:
             self.root.destroy()
             return
-    
-        if not self.master_password:
-            self.master_password = ' '  # 默认使用空格作为 Master Key
 
         self.create_widgets()
         self.root.deiconify()  # 显示主窗口
@@ -61,10 +61,13 @@ class PasswordManager:
         self.generate_master.grid(row=0, column=0, padx=10, pady=2)
 
         # 在主界面的最上方显示输入的 Master Key
-        self.master_key_label = tk.Label(self.generate_master, text=f"Master Key: {self.master_password}", font=self.bold_font)
+        if self.master_password == ' ':
+            self.master_key_label = tk.Label(self.generate_master, text="Master Key: default a space -> ", font=self.bold_font)
+        else:
+            self.master_key_label = tk.Label(self.generate_master, text=f"Master Key: {self.master_password}", font=self.bold_font)
         self.master_key_label.grid(row=0, column=0, padx=10, pady=2, rowspan=2)
 
-        # 展示密钥和打开文件的界面，"Generate Password Master"
+        # 展示密钥和打开文件的界面，"Generate Password Frame"
         self.generate_button = tk.LabelFrame(self.root, font=self.bold_font)
         self.generate_button.grid(row=0, column=1, padx=10, pady=2)
 
@@ -98,7 +101,10 @@ class PasswordManager:
         self.special_check.grid(row=2, column=1, pady=8)
 
         self.generate_button = tk.Button(self.generate_frame, text="Generate", command=self.generate_password)
-        self.generate_button.grid(row=3, column=0, columnspan=2, pady=5)
+        self.generate_button.grid(row=3, column=0, padx=1, pady=5)
+
+        self.default1_button = tk.Button(self.generate_frame, text="Default", command=self.deflaut_password)
+        self.default1_button.grid(row=3, column=1, padx=1, pady=5)
 
         # 存储密码部分 "Store Password Frame"
         self.store_frame = tk.LabelFrame(self.root, text="Store Password", font=self.bold_font)
@@ -108,16 +114,19 @@ class PasswordManager:
         self.website_label.grid(row=0, column=0, pady=5)
         self.website_entry = tk.Entry(self.store_frame, width=23, justify="center")
         self.website_entry.grid(row=0, column=1, pady=5)
+        # self.website_entry.bind("<Return>", self.store_password)
 
         self.username_label = tk.Label(self.store_frame, text="Name(optional):")
         self.username_label.grid(row=1, column=0, pady=5)
         self.username_entry = tk.Entry(self.store_frame, width=23, justify="center")
         self.username_entry.grid(row=1, column=1, pady=5)
+        self.username_entry.bind("<Return>", self.store_password)
 
         self.password_label = tk.Label(self.store_frame, text="Password:")
         self.password_label.grid(row=2, column=0, pady=5)
         self.password_entry = tk.Entry(self.store_frame, width=23, justify="center")
         self.password_entry.grid(row=2, column=1, pady=5)
+        self.password_entry.bind("<Return>", self.store_password)
 
         self.store_button = tk.Button(self.store_frame, text="Store", command=self.store_password)
         self.store_button.grid(row=3, column=0, columnspan=2, pady=3)
@@ -130,6 +139,7 @@ class PasswordManager:
         self.query_website_label.grid(row=0, column=0)
         self.query_website_entry = tk.Entry(self.query_frame, width=30, justify="center")
         self.query_website_entry.grid(row=0, column=1)
+        self.query_website_entry.bind("<Return>", self.query_password)  # 绑定回车键
 
         self.query_button = tk.Button(self.query_frame, text="Query", command=self.query_password)
         self.query_button.grid(row=1, column=1, padx=65, pady=3, sticky="w")
@@ -149,6 +159,7 @@ class PasswordManager:
         self.delete_website_label.grid(row=0, column=0)
         self.delete_website_entry = tk.Entry(self.delete_frame, width=30, justify="center")
         self.delete_website_entry.grid(row=0, column=1)
+        self.delete_website_entry.bind("<Return>", self.delete_password)  # 绑定回车键
 
         self.delete_button = tk.Button(self.delete_frame, text="Delete", command=self.delete_password)
         self.delete_button.grid(row=1, column=1, pady=5)
@@ -230,43 +241,53 @@ class PasswordManager:
         self.password_entry.delete(0, tk.END)
         self.password_entry.insert(0, password)
 
-    def store_password(self):
+    def deflaut_password(self):
+        self.length_entry.delete(0, tk.END)
+        self.length_entry.insert(0,'20')
+        self.use_upper = self.upper_var.set(1)
+        self.use_lower = self.lower_var.set(1)
+        self.use_digits = self.digits_var.set(1)
+        self.use_special = self.special_var.set(1)
+        
+        self.generate_password()
+    
+    def store_password(self, event=None):
         website = self.website_entry.get()
         username = self.username_entry.get()
         password = self.password_entry.get()
 
         if not website or not password:
-            self.show_message("Error", "Website and password fields cannot be empty.", self.bold_font)
+            self.show_message("Error", "Website and password cannot be empty.", self.bold_font)
             return
         if save_data(self.master_password, website, username, password):
             self.show_message("Success", "Password stored successfully.", self.bold_font)
         else:
             self.show_message("Error", "The same information already exists.", self.bold_font)
 
-    def query_password(self):
+    def query_password(self, event=None):
         website = self.query_website_entry.get()
         results = query_data(self.master_password, website)
 
         self.result_text.delete(1.0, tk.END)
         if results == "Invalid master key":
-            self.result_text.insert(tk.END, "Invalid master key")
+            self.result_text.insert(tk.END, f"Invalid master key with '{self.master_password}'")
         elif results is None:
-            self.result_text.insert(tk.END, "No data found.")
+            self.result_text.insert(tk.END, f"No data found for website '{website}'")
         else:
             for stored_website, username, password in results:
                 self.result_text.insert(tk.END, f"Website: {stored_website}\nUsername: {username}\nPassword: {password}\n\n")
 
-    def delete_password(self):
+    def delete_password(self, event=None):
         website = self.delete_website_entry.get()
         result = delete_data(self.master_password, website)
         self.delete_result_text.delete(1.0, tk.END)
 
         if result == "Invalid master key":
-            self.delete_result_text.insert(tk.END, "Invalid master key.")
+            self.delete_result_text.insert(tk.END, f"Invalid master key with '{self.master_password}'")
         elif result:
             self.delete_result_text.insert(tk.END, "Password deleted successfully.")
         else:
-            self.delete_result_text.insert(tk.END, "No data found, please enter whole website.")
+            self.delete_result_text.insert(tk.END, f"No data found for website '{website}', please enter whole website.")
 
     
     def open_md_file(self):
@@ -282,4 +303,3 @@ class PasswordManager:
             subprocess.Popen(['start', txt_path], shell=True)
         else:
             self.show_message("Error", "TXT file not found. Please store your password first", self.bold_font)
-

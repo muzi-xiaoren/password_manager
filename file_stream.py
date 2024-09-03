@@ -21,6 +21,7 @@ if not os.path.exists(txt_file_path):
     open(txt_file_path, 'w').close()
 
 
+# 保存数据
 def save_data(master_password, website, username, password):
     key = generate_key(master_password)
     encrypted_password = encrypt_data(password, key)
@@ -29,11 +30,11 @@ def save_data(master_password, website, username, password):
         return False
 
     # 保存到 txt 文件
-    with open(os.path.join(SAVE_DIR, 'passwords.txt'), 'a') as file:
+    with open(txt_file_path, 'a') as file:
         file.write(f'{website},{username},{encrypted_password}\n')
 
     # 保存到 md 文件
-    with open(os.path.join(SAVE_DIR, 'passwords.md'), 'a') as file:
+    with open(md_file_path, 'a') as file:
         file.write(f'### {website}\n')
         file.write(f'- **Username**: {username}\n')
         file.write(f'- **Password**: {encrypted_password}\n\n')
@@ -43,9 +44,7 @@ def save_data(master_password, website, username, password):
 
 # 检查是否存在相同的条目
 def check_existing_entry(key, website, username, password):
-    txt_file_path = os.path.join(SAVE_DIR, 'passwords.txt')
-
-        # 检查文件是否为空
+    # 检查文件是否为空
     if os.path.getsize(txt_file_path) == 0:
         return False
     
@@ -63,6 +62,7 @@ def check_existing_entry(key, website, username, password):
     return False
         
 
+# 查询数据
 def query_data(master_password, website):
     key = generate_key(master_password)
     results = []
@@ -72,7 +72,7 @@ def query_data(master_password, website):
     search_terms = set(website.replace('://', '.').replace('/', '.').split('.'))
     
     try:
-        with open(os.path.join(SAVE_DIR, 'passwords.txt'), 'r') as file:
+        with open(txt_file_path, 'r') as file:
             for line in file:
                 stored_website, stored_username, encrypted_password = line.strip().split(',')
                 
@@ -96,10 +96,9 @@ def query_data(master_password, website):
         return None
 
 
+# 删除数据
 def delete_data(master_password, website):
     key = generate_key(master_password)
-    txt_file_path = os.path.join(SAVE_DIR, 'passwords.txt')
-    md_file_path = os.path.join(SAVE_DIR, 'passwords.md')
 
     try:
         with open(txt_file_path, 'r') as file:
