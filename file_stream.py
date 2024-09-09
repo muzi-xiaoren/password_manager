@@ -1,15 +1,22 @@
 import os
 from data_crypto import generate_key, encrypt_data, decrypt_data
 from cryptography.fernet import InvalidToken
+import configparser
 
 
-# 创建保存文件夹
-home_dir = os.path.expanduser('~')
+# 1. 读取 config.ini 文件中的配置
+config = configparser.ConfigParser()
+config.read('config.ini')  # 读取配置文件
+
+# 2. 从 config.ini 获取 home_dir 的值
+home_dir = eval(config['DEFAULT']['home_dir'])  # 使用 eval 执行字符串中的 Python 表达式
+
+# 3. 创建保存文件夹
 SAVE_DIR = os.path.join(home_dir, 'password_person')
 if not os.path.exists(SAVE_DIR):
     os.makedirs(SAVE_DIR)
 
-# 检查并创建passwords.md和passwords.txt文件
+# 4. 检查并创建 passwords.md 和 passwords.txt 文件
 md_file_path = os.path.join(SAVE_DIR, 'passwords.md')
 txt_file_path = os.path.join(SAVE_DIR, 'passwords.txt')
 
@@ -70,6 +77,7 @@ def query_data(master_password, website):
     
     # 拆分输入的 website，使用多种分隔符
     search_terms = set(website.replace('://', '.').replace('/', '.').split('.'))
+    if '' in search_terms : search_terms.remove('')
     
     try:
         with open(txt_file_path, 'r') as file:
