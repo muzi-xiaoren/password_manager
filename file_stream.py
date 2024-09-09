@@ -70,6 +70,7 @@ def query_data(master_password, website):
     
     # 拆分输入的 website，使用多种分隔符
     search_terms = set(website.replace('://', '.').replace('/', '.').split('.'))
+    search_terms.remove('')
     
     try:
         with open(txt_file_path, 'r') as file:

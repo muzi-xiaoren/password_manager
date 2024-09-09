@@ -1,6 +1,4 @@
 import tkinter as tk
-from password_generate import generate_data
-from file_stream import save_data, query_data, delete_data
 
 
 class CustomMessageBox(tk.Toplevel):
